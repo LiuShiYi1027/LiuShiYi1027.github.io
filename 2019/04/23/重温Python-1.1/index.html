@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="刘十一,LiuShiYi, 刘国庆">
+  
+  
+    <meta name="description" content="刘国庆的个人博客">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    【重温Python】1.1-数据结构与算法-解压序列赋值给多个变量 |
+    
+    刘十一</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-重温Python-1.1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【重温Python】1.1-数据结构与算法-解压序列赋值给多个变量
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/04/23/重温Python-1.1/" class="article-date">
+  <time datetime="2019-04-23T01:25:00.000Z" itemprop="datePublished">2019-04-23</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/代码/">代码</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p><strong>现在有一个包含 N 个元素的元组或者是序列，怎样将它里面的值解压后同时赋值给 N 个变量？</strong></p>
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><p>任何的序列（可迭代对象）可以通过一个简单的赋值语句解压并赋值给多个变量。</p>
+<a id="more"></a>
+<p>唯一的限制条件就是<strong>变量的数量必须跟序列元素的数量是一样的</strong>。</p>
+<p>下面是一个简单的示例：</p>
+<pre class=" language-python"><code class="language-python">p <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+x<span class="token punctuation">,</span> y <span class="token operator">=</span> p
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+</code></pre>
+<p>另一个示例：</p>
+<pre class=" language-python"><code class="language-python">data <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">'ACME'</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">91.1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2012</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">)</span> <span class="token punctuation">]</span>
+name<span class="token punctuation">,</span> shares<span class="token punctuation">,</span> price<span class="token punctuation">,</span> <span class="token punctuation">(</span>year<span class="token punctuation">,</span> mon<span class="token punctuation">,</span> day<span class="token punctuation">)</span> <span class="token operator">=</span> data
+</code></pre>
+<h2 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h2><ol>
+<li>如果变量个数与序列元素的个数不匹配，会产生一个异常。</li>
+<li>实际上，这种解压赋值可以用在任何可迭代对象上面，而不仅仅是列表或者元组，包括字符串，文件对象，迭代器和生成器。</li>
+</ol>
+<p>可迭代对象示例：</p>
+<pre class=" language-python"><code class="language-python">s <span class="token operator">=</span> <span class="token string">"hello"</span>
+a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> e <span class="token operator">=</span> s
+data <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">'ACME'</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">91.1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2012</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">)</span> <span class="token punctuation">]</span>
+_<span class="token punctuation">,</span> shares<span class="token punctuation">,</span> price<span class="token punctuation">,</span> _ <span class="token operator">=</span> data
+</code></pre>
+<blockquote>
+<p>在 Python，不存在废弃符的语法。但是可以使用任意变量名去占位，到时候丢掉这些变量就行了。例如，上述代码中的’_’。需要保证的是，这些占位符变量名在其它地方没有被用到。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.liushiyi.cn/2019/04/23/重温Python-1.1/" data-id="cjv9458820002jn4tgsgab4dd" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重温Python/">重温Python</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/04/24/重温Python-1.2/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            【重温Python】1.2-数据结构与算法-解压可迭代对象赋值给多个变量
+          
+        </div>
+      </a>
+    
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 刘十一</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="刘十一"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/books">Book</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/movies">Movie</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+      <li class="nav-item">
+          <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+      </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

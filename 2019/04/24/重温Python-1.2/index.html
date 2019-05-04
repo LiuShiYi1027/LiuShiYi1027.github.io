@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="刘十一,LiuShiYi, 刘国庆">
+  
+  
+    <meta name="description" content="刘国庆的个人博客">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    【重温Python】1.2-数据结构与算法-解压可迭代对象赋值给多个变量 |
+    
+    刘十一</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-重温Python-1.2" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【重温Python】1.2-数据结构与算法-解压可迭代对象赋值给多个变量
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/04/24/重温Python-1.2/" class="article-date">
+  <time datetime="2019-04-24T01:25:00.000Z" itemprop="datePublished">2019-04-24</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/代码/">代码</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p><strong>如果一个可迭代对象的元素个数超过变量个数时，会抛出一个”ValueError”,那么怎样才能从这个可迭代对象中解压出 N 个元素出来？</strong></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在 Python 中可以使用星号表达式来解决上述问题。</p>
+<a id="more"></a>
+<p>考虑下面一个情况，在学期末的时候，想统计一下学期末的平均成绩，但是排除掉第一个和最后一个分数。<br>如果一共只有四个分数，可能就直接去简单的手动赋值，但是如果有 24 个呢？<br>这个时候想好表达式就派上用场了。</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">drop_first_last</span><span class="token punctuation">(</span>grades<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    first<span class="token punctuation">,</span> <span class="token operator">*</span>middle<span class="token punctuation">,</span> last <span class="token operator">=</span> grades
+    <span class="token keyword">return</span> sum<span class="token punctuation">(</span>middle<span class="token punctuation">)</span> <span class="token operator">/</span> len<span class="token punctuation">(</span>middle<span class="token punctuation">)</span>
+</code></pre>
+<p>上述代码为伪代码，其中 grades 为一个 list 对象。grades 中存储成绩，我们使用星号表达式截取除第一个和最后一个的成绩列表。</p>
+<p>考虑另外一种情况，假设现在有一些用户的记录列表，每条记录包含一个名字、邮件，接着就是不确定数量的电话号码。<br>可以像下面这样分解这些记录：</p>
+<pre class=" language-python"><code class="language-python">record <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'Dave'</span><span class="token punctuation">,</span> <span class="token string">'dave@example.com'</span><span class="token punctuation">,</span> <span class="token string">'773-555-1212'</span><span class="token punctuation">,</span> <span class="token string">'847-555-1212'</span><span class="token punctuation">)</span>
+name<span class="token punctuation">,</span> email<span class="token punctuation">,</span> <span class="token operator">*</span>phone_numbers <span class="token operator">=</span> record
+</code></pre>
+<ol>
+<li>phone_numbers 变量永远都是列表类型，不管解压的电话号码数量是多少(包含 0 个)。</li>
+<li>任何使用到 phone_numbers 变量的代码就不需要做多余的类型检查(它一定是 list 类型)</li>
+</ol>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ol>
+<li>扩展的迭代解压语法是专门为解压不确定个数或任意个数元素的可迭代对象而设计的。通常，这些可迭代对象的元素结构有确定的规则，星号表达式让开发人员很容易的利用这些规则来解压出元素来。</li>
+<li>值得注意的是，星号表达式在迭代元素为可变长元组的序列时时很有用的。</li>
+</ol>
+<pre class=" language-python"><code class="language-python">records <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'bar'</span><span class="token punctuation">,</span> <span class="token string">'hello'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">do_foo</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">do_bar</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'bar'</span><span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> tag<span class="token punctuation">,</span> <span class="token operator">*</span>args <span class="token operator">*</span><span class="token keyword">in</span><span class="token operator">*</span>records<span class="token punctuation">:</span>
+     <span class="token keyword">if</span> tag <span class="token operator">==</span> <span class="token string">'foo'</span><span class="token punctuation">:</span>
+        do_foo<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> tag <span class="token operator">==</span> <span class="token string">'bar'</span><span class="token punctuation">:</span>
+        do_bar<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span>
+</code></pre>
+<p>星号解压语法在字符串操作的时候也会很有用，比如字符串的分割。</p>
+<pre class=" language-python"><code class="language-python">line <span class="token operator">=</span> <span class="token string">'nobody:*:-2:-2:Unprivileged User:/var/empty:/usr/bin/false'</span>
+uname<span class="token punctuation">,</span><span class="token operator">*</span>fields<span class="token punctuation">,</span> homedir<span class="token punctuation">,</span> sh <span class="token operator">=</span> line<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>uname<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>fields<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>homedir<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>sh<span class="token punctuation">)</span>
+</code></pre>
+<p>有时候，想解压一些元素之后丢弃他们，不能简单地就使用*，但是可以简单的使用一个普通的废弃名称<br>例如’_’或者’ign’等</p>
+<pre class=" language-python"><code class="language-python">record <span class="token operator">=</span> <span class="token punctuation">(</span>‘ACME’<span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">123.45</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token number">18</span><span class="token punctuation">,</span><span class="token number">2012</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+name<span class="token punctuation">,</span> <span class="token operator">*</span>_<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">*</span>_<span class="token punctuation">,</span> year<span class="token punctuation">)</span> <span class="token operator">=</span> record
+<span class="token keyword">print</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>year<span class="token punctuation">)</span>
+</code></pre>
+<p>在很多函数式语言中，星号解压语法跟列表处理有许多相似之处。比如，如果你有一个列表， 你可以很容易的将它分割成前后两部分：</p>
+<pre class=" language-python"><code class="language-python">items <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span>
+head<span class="token punctuation">,</span> <span class="token operator">*</span>tail <span class="token operator">=</span> items
+<span class="token keyword">print</span><span class="token punctuation">(</span>items<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span>
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.liushiyi.cn/2019/04/24/重温Python-1.2/" data-id="cjv9458860006jn4twdygce2e" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重温Python/">重温Python</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/04/25/重温Python-1.3/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            【重温Python】1.3-数据结构与算法-保留最后N个元素
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/04/23/重温Python-1.1/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">【重温Python】1.1-数据结构与算法-解压序列赋值给多个变量</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 刘十一</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="刘十一"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/books">Book</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/movies">Movie</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+      <li class="nav-item">
+          <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+      </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
