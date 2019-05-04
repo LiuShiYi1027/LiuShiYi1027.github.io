@@ -4,8 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="friends, 刘十一,LiuShiYi, 刘国庆">
-    <meta name="description" content="friends | 刘十一">
+    <meta name="keywords" content="【重温Python】1.1-数据结构与算法-解压序列赋值给多个变量, 刘十一,LiuShiYi, 刘国庆">
+    <meta name="description" content="问题：现在有一个包含N个元素的元组或者是序列，怎样将它里面的值解压后同时赋值给N个变量？
+解决方案：任何的序列（可迭代对象）可以通过一个简单的赋值语句解压并赋值给多个变量。唯一的限制条件就是变量的数量必须跟序列元素的数量是一样的。
+下面是一">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>friends | 刘十一</title>
+    <title>【重温Python】1.1-数据结构与算法-解压序列赋值给多个变量 | 刘十一</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -263,7 +265,7 @@
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        friends
+                        【重温Python】1.1-数据结构与算法-解压序列赋值给多个变量
                     </div>
                 </div>
             </div>
@@ -372,12 +374,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Python/" target="_blank">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/重温Python/" target="_blank">
+                                <span class="chip bg-color">重温Python</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/代码/" class="post-category" target="_blank">
+                                代码
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -385,14 +404,14 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2019-04-24
+                    2019-04-23
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                        0
+                        319
                     </div>
                     
 
@@ -415,7 +434,32 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p><strong>现在有一个包含N个元素的元组或者是序列，怎样将它里面的值解压后同时赋值给N个变量？</strong></p>
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><p>任何的序列（可迭代对象）可以通过一个简单的赋值语句解压并赋值给多个变量。<br>唯一的限制条件就是<strong>变量的数量必须跟序列元素的数量是一样的</strong>。</p>
+<p>下面是一个简单的示例：</p>
+<pre class=" language-python"><code class="language-python">p <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+x<span class="token punctuation">,</span> y <span class="token operator">=</span> p
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+</code></pre>
+<p>另一个示例：</p>
+<pre class=" language-python"><code class="language-python">data <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">'ACME'</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">91.1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2012</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">)</span> <span class="token punctuation">]</span>
+name<span class="token punctuation">,</span> shares<span class="token punctuation">,</span> price<span class="token punctuation">,</span> <span class="token punctuation">(</span>year<span class="token punctuation">,</span> mon<span class="token punctuation">,</span> day<span class="token punctuation">)</span> <span class="token operator">=</span> data
+</code></pre>
+<h2 id="扩展："><a href="#扩展：" class="headerlink" title="扩展："></a>扩展：</h2><ol>
+<li>如果变量个数与序列元素的个数不匹配，会产生一个异常。</li>
+<li>实际上，这种解压赋值可以用在任何可迭代对象上面，而不仅仅是列表或者元组，包括字符串，文件对象，迭代器和生成器。</li>
+</ol>
+<p>可迭代对象示例：</p>
+<pre class=" language-python"><code class="language-python">s <span class="token operator">=</span> <span class="token string">"hello"</span>
+a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d<span class="token punctuation">,</span> e <span class="token operator">=</span> s
+data <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">'ACME'</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">91.1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2012</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">21</span><span class="token punctuation">)</span> <span class="token punctuation">]</span>
+_<span class="token punctuation">,</span> shares<span class="token punctuation">,</span> price<span class="token punctuation">,</span> _ <span class="token operator">=</span> data
+</code></pre>
+<blockquote>
+<p>在Python，不存在废弃符的语法。但是可以使用任意变量名去占位，到时候丢掉这些变量就行了。例如，上述代码中的’_’。需要保证的是，这些占位符变量名在其它地方没有被用到。</p>
+</blockquote>
+
             </div>
             <hr>
 
@@ -438,7 +482,7 @@
                     </span>
                     <a href="http://www.liushiyi.cn" class="b-link-green">刘十一</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/friends/index.html" class="b-link-green">friends</a>
+                    <a href="/2019/04/23/chong-wen-python-1.1/" class="b-link-green">【重温Python】1.1-数据结构与算法-解压序列赋值给多个变量</a>
                 </p>
             </div>
         </div>
@@ -461,33 +505,49 @@
         
         <div class="article col s12 m6 overflow-policy" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;Current
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/2019/04/24/chong-wen-python-1.2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="【重温Python】1.2-数据结构与算法-解压可迭代对象赋值给多个变量">
                         
-                        <span class="card-title">friends</span>
+                        <span class="card-title">【重温Python】1.2-数据结构与算法-解压可迭代对象赋值给多个变量</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary block-with-text"></div>
+                    <div class="summary block-with-text">问题：如果一个可迭代对象的元素个数超过变量个数时，会抛出一个”ValueError”,那么怎样才能从这个可迭代对象中解压出N个元素出来？
+解决方案在Python中可以使用星号表达式来解决上述问题。
+考虑下面一个情况，在学期末的时候，想统计一</div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-24
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-24
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            刘十一
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/代码/" class="post-category" target="_blank">
+                                    代码
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/" target="_blank">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/重温Python/" target="_blank">
+                        <span class="chip bg-color">重温Python</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -498,30 +558,48 @@
                 Current&nbsp;<i class="fa fa-dot-circle-o"></i>
             </div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/2019/04/23/chong-wen-python-1.1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="【重温Python】1.1-数据结构与算法-解压序列赋值给多个变量">
                         
-                        <span class="card-title">friends</span>
+                        <span class="card-title">【重温Python】1.1-数据结构与算法-解压序列赋值给多个变量</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary block-with-text"></div>
+                    <div class="summary block-with-text">问题：现在有一个包含N个元素的元组或者是序列，怎样将它里面的值解压后同时赋值给N个变量？
+解决方案：任何的序列（可迭代对象）可以通过一个简单的赋值语句解压并赋值给多个变量。唯一的限制条件就是变量的数量必须跟序列元素的数量是一样的。
+下面是一</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-24
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-23
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            刘十一
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/代码/" class="post-category" target="_blank">
+                                    代码
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/" target="_blank">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/重温Python/" target="_blank">
+                        <span class="chip bg-color">重温Python</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
